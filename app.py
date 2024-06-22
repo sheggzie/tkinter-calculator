@@ -13,6 +13,11 @@ def showClick(input):
     expression += str(input)
     equation.set(expression)
 
+def clear_display():
+    global expression
+    expression = ""
+    equation.set(expression)
+
 display = tk.Entry(root, textvariable=equation)
 display.grid(row=0, column=0, columnspan=4, ipadx=80)
 
@@ -32,7 +37,7 @@ divide = tk.Button(root, text="/", command=lambda: showClick('/'), width=8)
 multiply = tk.Button(root, text="x", command=lambda: showClick('x'), width=8)
 decimal = tk.Button(root, text=".", command=lambda: showClick('.'), width=8)
 equalsto = tk.Button(root, text="=", command=lambda: showClick('='), width=28)
-clear = tk.Button(root, text="Clear", command="", width=8)
+clear = tk.Button(root, text="Clear", command=lambda: clear_display(), width=8)
 
 seven.grid(row=1, column=0)
 eight.grid(row=1, column=1)
@@ -51,15 +56,5 @@ decimal.grid(row=4, column=2)
 divide.grid(row=4, column=3)
 equalsto.grid(row=5, column=0, columnspan=3)
 clear.grid(row=5, column=3)
-
-
-
-
-
-
-
-
-
-
 
 root.mainloop()
