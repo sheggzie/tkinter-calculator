@@ -7,6 +7,7 @@ root.geometry("310x160")
 equation = tk.StringVar()
 
 expression = ""
+last_output = ""
 
 def showClick(input):
     global expression
@@ -14,21 +15,37 @@ def showClick(input):
     equation.set(expression)
 
 def clear_display():
-    global expression
+    global expression, last_output
     expression = ""
     equation.set(expression)
+    last_output = ""
 
 def calculate():
+    global expression, last_output
     try:
-        global expression
-        total = str(eval(expression))
+        signs = ["+", "-", "*", "/"]
+        if expression[0] in signs:
+            join = str(last_output) + str(expression)
+            total = str(eval(join))
+        else:
+            total = str(eval(expression))
+        
+
         equation.set(total)
+        last_output = total
         expression = ""
     except:
         equation.set("error")
         expression = ""
 
-
+# def from_memory():
+#     global expression, last_output
+#     if expression == last_output:
+#         join = str(last_output) + str(expression)
+#         total = str(eval(join))
+#         equation.set(total)
+#     else:
+#         last_output = ""
 
 display = tk.Entry(root, textvariable=equation)
 display.grid(row=0, column=0, columnspan=4, ipadx=80)
