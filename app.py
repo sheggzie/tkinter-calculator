@@ -18,6 +18,18 @@ def clear_display():
     expression = ""
     equation.set(expression)
 
+def calculate():
+    try:
+        global expression
+        total = str(eval(expression))
+        equation.set(total)
+        expression = ""
+    except:
+        equation.set("error")
+        expression = ""
+
+
+
 display = tk.Entry(root, textvariable=equation)
 display.grid(row=0, column=0, columnspan=4, ipadx=80)
 
@@ -34,9 +46,9 @@ zero = tk.Button(root, text="0", command=lambda: showClick(0), width=18)
 add = tk.Button(root, text="+", command=lambda: showClick('+'), width=8)
 subtract = tk.Button(root, text="-", command=lambda: showClick('-'), width=8)
 divide = tk.Button(root, text="/", command=lambda: showClick('/'), width=8)
-multiply = tk.Button(root, text="x", command=lambda: showClick('x'), width=8)
+multiply = tk.Button(root, text="x", command=lambda: showClick('*'), width=8)
 decimal = tk.Button(root, text=".", command=lambda: showClick('.'), width=8)
-equalsto = tk.Button(root, text="=", command=lambda: showClick('='), width=28)
+equalsto = tk.Button(root, text="=", command=lambda: calculate(), width=28)
 clear = tk.Button(root, text="Clear", command=lambda: clear_display(), width=8)
 
 seven.grid(row=1, column=0)
